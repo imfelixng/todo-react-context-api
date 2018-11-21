@@ -4,6 +4,8 @@ import TodoContext from '../../context/TodoContext';
 
 export default class Todos extends Component {
 
+  static contextType = TodoContext;
+
   renderItem = (todos) => {
     return todos.map((todo,index) => {
       return (
@@ -13,15 +15,11 @@ export default class Todos extends Component {
   }
   render() {
     return (
-      <TodoContext.Consumer>
-        {
-          (context) => (
-            <ul style = {{listStyle: "none"}}>
-              {this.renderItem(context.state.list)}
-            </ul>
-          )
-        }
-      </TodoContext.Consumer>
+      <React.Fragment>
+        <ul style = {{listStyle: "none"}}>
+              {this.renderItem(this.context.state.list)}
+        </ul>
+      </React.Fragment>
     )
   }
 }
